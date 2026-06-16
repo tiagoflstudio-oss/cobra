@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #070708;
+    color: #e4e4e7;
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+}
+
+/* Glassmorphism customizados */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.5rem;
+}
+
+/* Efeito Glow para os itens Neon */
+.neon-glow-primary {
+  box-shadow: 0 0 15px rgba(213, 255, 64, 0.25);
+  text-shadow: 0 0 8px rgba(213, 255, 64, 0.5);
+}
+
+.neon-border-primary {
+  border-color: rgba(213, 255, 64, 0.3);
+  box-shadow: 0 0 20px rgba(213, 255, 64, 0.1);
+}
+
+.neon-glow-purple {
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+.neon-glow-emerald {
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.neon-glow-yellow {
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.3);
+}
+
+/* Ocultar barra de rolagem mas manter funcionalidade */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
