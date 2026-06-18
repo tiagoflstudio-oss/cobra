@@ -9,21 +9,19 @@ import { Gamepad2 } from 'lucide-react';
 export default function PlayPage() {
   const router = useRouter();
   const supabase = createClient();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isChecking, setIsChecking] = useState<boolean>(true);
 
   useEffect(() => {
-    async function checkAuth() {
-      // Sempre permite o acesso à arena para testes offline/sem login
-      setIsAuthenticated(true);
-    }
-    checkAuth();
+    // Verifica a sessão brevemente para inicializar o cliente Supabase
+    // O jogo pode ser jogado sem login, mas o score só será salvo no ranking global se autenticado
+    supabase.auth.getUser().finally(() => setIsChecking(false));
   }, []);
 
-  if (isAuthenticated === null) {
+  if (isChecking) {
     return (
       <div className="min-h-screen bg-[#070708] flex flex-col items-center justify-center space-y-4">
         <div className="w-12 h-12 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center text-primary shadow-[0_0_20px_rgba(213,255,64,0.2)] animate-pulse">
-          <Gamepad2 size={24} className="animate-spin duration-3000" />
+          <Gamepad2 size={24} />
         </div>
         <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest animate-pulse">
           Preparando arena de jogo...
@@ -32,17 +30,12 @@ export default function PlayPage() {
     );
   }
 
-  if (isAuthenticated === false) {
-    return null; // Redirecionando para login
-  }
-
   return (
     <main className="min-h-screen bg-[#070708] text-white overflow-hidden relative">
       <SecretGame
         onClose={() => router.push('/')}
         playClickSound={() => {
-          // Clique simples sintetizado via Web Audio API caso queira, 
-          // mas o próprio secret-game já sintetiza quase todos os sons.
+          // Sons 8-bit já são sintetizados internamente pelo SecretGame via Web Audio API
         }}
       />
     </main>
