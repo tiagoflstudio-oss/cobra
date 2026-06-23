@@ -3064,7 +3064,13 @@ export default function SecretGame({
       if (res.success) {
         setScoreSaved(true);
         loadLeaderboard(); // Recarrega o ranking com a nova pontuação
+        toast.success('Pontuação gravada com sucesso no ranking global!');
       } else {
+        // Exibir erro específico
+        if (res.error) {
+          toast.error(`Não foi possível salvar no ranking online: ${res.error}`);
+        }
+        
         // Fallback caso o banco não esteja configurado ou o jogador não esteja logado
         const mockEntry = {
           id: Math.random().toString(),
@@ -3079,8 +3085,10 @@ export default function SecretGame({
         setScoreSaved(true);
         toast.info('Pontuação gravada no ranking local (Modo Visitante)!');
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      toast.error(`Erro de conexão: ${err.message || 'Erro inesperado'}`);
+      
       // Fallback em caso de erro de conexão
       const mockEntry = {
         id: Math.random().toString(),
