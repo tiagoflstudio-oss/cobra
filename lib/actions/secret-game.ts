@@ -214,7 +214,7 @@ export async function getGameRankingAction(): Promise<{ success: boolean; data?:
       .from('secret_game_ranking')
       .select('id, player_name, score, created_at, user_id')
       .order('score', { ascending: false })
-      .limit(10);
+      .limit(100);
 
     if (error) {
       console.error('Erro ao ler ranking do banco:', error);

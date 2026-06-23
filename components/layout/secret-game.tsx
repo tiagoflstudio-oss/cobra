@@ -3314,6 +3314,17 @@ export default function SecretGame({
                 </button>
               )}
             </div>
+
+            <button
+              onClick={() => {
+                playClickSound();
+                document.getElementById('leaderboard-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="w-full py-2 bg-white/5 border border-white/10 hover:bg-white/10 text-zinc-300 hover:text-white font-black uppercase text-[9px] tracking-wider rounded-xl transition-all active:scale-95 shadow-md flex items-center justify-center gap-1.5"
+              type="button"
+            >
+              <Trophy size={10} className="text-yellow-500 animate-pulse" /> Ranking Global (Top 100)
+            </button>
           </div>
         </div>
 
@@ -3776,7 +3787,7 @@ export default function SecretGame({
               <div className="absolute inset-0 bg-black/95 flex flex-col p-4 text-left animate-in fade-in duration-200 z-20 md:hidden">
                 <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3">
                   <h4 className="text-xs font-black uppercase tracking-widest text-yellow-500 flex items-center gap-1.5">
-                    <Trophy size={12} className="text-yellow-500 animate-pulse" /> Classificação Global (Top 10)
+                    <Trophy size={12} className="text-yellow-500 animate-pulse" /> Classificação Global (Top 100)
                   </h4>
                   <button
                     onClick={() => {
@@ -3800,7 +3811,7 @@ export default function SecretGame({
                   <p className="text-[10px] text-zinc-500 text-center py-6 flex-1 flex items-center justify-center">Sem recordes. Seja o primeiro!</p>
                 ) : (
                   <div className="space-y-1.5 overflow-y-auto flex-1 pr-1 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-                    {ranking.slice(0, 10).map((entry, index) => {
+                    {ranking.slice(0, 100).map((entry, index) => {
                       const colors = [
                         'text-yellow-500 border-yellow-500/20 bg-yellow-500/5',
                         'text-zinc-300 border-zinc-500/20 bg-zinc-500/5',
@@ -4116,9 +4127,9 @@ export default function SecretGame({
           {/* Ranking e Recompensas lado a lado abaixo do Canvas (Desktop Only - a partir de md) */}
           <div className="hidden md:grid grid-cols-2 gap-4 w-[800px] mt-5">
             {/* Card de Ranking */}
-            <div className="glass-card p-4 flex flex-col border-white/5 bg-[#0a0a0c]/60 rounded-2xl shadow-lg h-[240px] overflow-hidden">
+            <div id="leaderboard-section" className="glass-card p-4 flex flex-col border-white/5 bg-[#0a0a0c]/60 rounded-2xl shadow-lg h-[240px] overflow-hidden">
               <h4 className="text-[9px] font-black uppercase tracking-widest text-yellow-500 flex items-center gap-1.5 border-b border-white/5 pb-2 mb-2">
-                <Trophy size={11} className="text-yellow-500 animate-pulse" /> Classificação Global (Top 10)
+                <Trophy size={11} className="text-yellow-500 animate-pulse" /> Classificação Global (Top 100)
               </h4>
 
               {isLoadingRanking ? (
@@ -4131,7 +4142,7 @@ export default function SecretGame({
                 <p className="text-[9px] text-zinc-500 text-center py-6 flex-1 flex items-center justify-center">Sem recordes salvos.</p>
               ) : (
                 <div className="space-y-1 overflow-y-auto flex-1 pr-1 scrollbar-thin scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-                  {ranking.slice(0, 10).map((entry, index) => {
+                  {ranking.slice(0, 100).map((entry, index) => {
                     const colors = [
                       'text-yellow-500 border-yellow-500/20 bg-yellow-500/5',
                       'text-zinc-300 border-zinc-500/20 bg-zinc-500/5',
