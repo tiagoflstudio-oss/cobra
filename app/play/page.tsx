@@ -33,7 +33,7 @@ export default function PlayPage() {
   return (
     <main className="min-h-screen bg-[#070708] text-white overflow-hidden relative">
       <SecretGame
-        onClose={() => router.push('/')}
+        onClose={() => { window.location.href = '/'; }}
         playClickSound={() => {
           // Sons 8-bit já são sintetizados internamente pelo SecretGame via Web Audio API
         }}
